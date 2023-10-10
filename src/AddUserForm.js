@@ -37,7 +37,7 @@ const AddUserForm = () => { //{ onUserAdded }
 
     if (newUser.userName && newUser.email && newUser.phoneNumber) {
       try {
-        const response = await fetch('http://localhost:3001/api/addUser', {
+        const response = await fetch('https://ill-slug-pea-coat.cyclic.app:3001/api/addUser', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

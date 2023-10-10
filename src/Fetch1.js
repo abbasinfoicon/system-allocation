@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 const authService = require('../src/authService');
 
-const BASE_URL =  'http://localhost:3001/api/';
+const BASE_URL =  'https://ill-slug-pea-coat.cyclic.app:3001/api/';
 
 
 export const get = async(url,headers) => {

@@ -22,7 +22,7 @@ function RegistrationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/api/create', formData);
+      const response = await axios.post('https://ill-slug-pea-coat.cyclic.app:3001/api/create', formData);
       navigate('/signup-success');
     } catch (error) {
       console.log(error)

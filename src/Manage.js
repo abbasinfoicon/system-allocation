@@ -43,7 +43,7 @@ const DashboarManage = () => {
       data.oldStartDate = formOldData.startDate;
       data.oldEndDate = formOldData.endDate;
       console.log(data);
-      const response = await fetch(`http://localhost:3001/api/updateHistory/${id.id}`, {
+      const response = await fetch(`https://ill-slug-pea-coat.cyclic.app:3001/api/updateHistory/${id.id}`, {
         method: 'PUT', // Use the appropriate HTTP method (PUT or PATCH) for updating data
         headers: {
           'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ const DashboarManage = () => {
           toast.error("This system is already assigned to another user.");
         } else {
           try {
-            const response = await fetch('http://localhost:3001/api/saveHistory/' + id.id, {
+            const response = await fetch('https://ill-slug-pea-coat.cyclic.app:3001/api/saveHistory/' + id.id, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -138,7 +138,7 @@ const DashboarManage = () => {
         }
       } else {
         try {
-          const response = await fetch('http://localhost:3001/api/saveHistory/' + id.id, {
+          const response = await fetch('https://ill-slug-pea-coat.cyclic.app:3001/api/saveHistory/' + id.id, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -179,7 +179,7 @@ const DashboarManage = () => {
 
   const fetchAssetData = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/getsystemuser/' + id.id);
+      const response = await fetch('https://ill-slug-pea-coat.cyclic.app:3001/api/getsystemuser/' + id.id);
       if (response.status == 201) {
         const data = await response.json();
         setAssetData(data);
@@ -199,7 +199,7 @@ const DashboarManage = () => {
 
   const fetchUserOptions = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/getUsers'); // Replace with your API endpoint to fetch users
+      const response = await fetch('https://ill-slug-pea-coat.cyclic.app:3001/api/getUsers'); // Replace with your API endpoint to fetch users
       if (response.status === 200) {
         const userData = await response.json();
         setUserOptions(userData.users); // Assuming your API returns an array of user objects
