@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const BASE_URL = 'http://localhost:3001/api/';
+// const BASE_URL = 'http://localhost:3001/api/';
+const BASE_URL = 'https://cooperative-erin-slacks.cyclic.app/api/';
 
 const DashboarManage = () => {
   const navigate = useNavigate();
