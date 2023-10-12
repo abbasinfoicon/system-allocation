@@ -34,13 +34,12 @@ const Header = () => {
                         <li><Link to={token ? '/dashboard' : '/login'} className={`nav-link px-2 ${location.pathname == '/dashboard' ? 'link-dark' : 'link-light'}`}>Home</Link></li>
                         <li><Link to={token ? '/addsystem' : '/login'} className={`nav-link px-2 ${location.pathname == '/addsystem' ? 'link-dark' : 'link-light'}`}>Add System</Link></li>
                         <li><Link to={token ? '/asset' : '/login'} className={`nav-link px-2 ${location.pathname == '/asset' ? 'link-dark' : 'link-light'}`}>Asset Data</Link></li>
-                        <li><Link to={token ? '/adduser' : '/login'} className={`nav-link px-2 ${location.pathname == '/adduser' ? 'link-dark' : 'link-light'}`}>Add User</Link></li>
+                        <li><Link to={token ? '/addemp' : '/login'} className={`nav-link px-2 ${location.pathname == '/addemp' ? 'link-dark' : 'link-light'}`}>Add Emp</Link></li>
                     </ul>
 
                     <div className="col-md-3 text-end">
                         {
-                            token ? <button onClick={handleLogout} className='btn btn-primary'>Logout</button> : <><Link to="/login" type="button" className="btn btn-outline-primary me-2">Login</Link>
-                                <Link to="/signup" type="button" className="btn btn-primary">Sign-up</Link></>
+                            token ? <><Link to={token ? '/adduser' : '/login'} type="button" className="btn btn-light me-2">New User</Link><button onClick={handleLogout} className='btn btn-primary'>Logout</button></> : <Link to="/login" type="button" className="btn btn-primary">Login</Link>
                         }
 
                     </div>

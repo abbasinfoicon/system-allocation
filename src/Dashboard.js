@@ -54,7 +54,6 @@ const Dashboard = () => {
       });
 
       if (response.status === 201) {
-        console.log('Form data submitted successfully.');
         // Fetch updated asset data after form submission
         // fetchAssetData();
         // Clear form fields
@@ -72,7 +71,7 @@ const Dashboard = () => {
           Designation: '',
         });
 
-
+        fetchAssetData(token);
 
         toast.success("Form data submitted successfully.");
       } else {
@@ -100,7 +99,6 @@ const Dashboard = () => {
         //body: JSON.stringify(formData),
       });
 
-      //console.log( response.status);
       //if (response.status === 200) {
       // const data = response;
       setAssetData(response);

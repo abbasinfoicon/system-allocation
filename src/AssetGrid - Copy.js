@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import { CDBCard, CDBCardBody, CDBDataTable, CDBContainer } from 'cdbreact';
 
 function AssetGrid({ assetData }) {
-  console.log("assigndata: ", assetData)
 
   const dataTable = () => {
-    const trw = assetData.map(asset => ({
+    const trw = assetData?.map(asset => ({
       ...asset,
       empHistory: asset.empHistory.length,
       action: <Link to={`/manage/${asset._id}`} className='btn btn-primary'>Manage</Link>

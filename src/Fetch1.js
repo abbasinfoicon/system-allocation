@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 const authService = require('../src/authService');
 
-const BASE_URL =  'https://ill-slug-pea-coat.cyclic.app:3001/api/';
+const BASE_URL =  'http://localhost:3001/api/';
 
 
 export const get = async(url,headers) => {
@@ -11,7 +11,6 @@ export const get = async(url,headers) => {
         const response = await fetch(BASE_URL+url, headers);
         
         const data =  await response.json();
-        // console.log(data);
         if(data.token_status){
           authService.logout();
           //navigate('/login');
@@ -29,7 +28,6 @@ export const post = async(url,headers) => {
     try {
         const response = await fetch(BASE_URL+url,headers); 
         const data =  await response.json();
-        // console.log(data);
         if(data.token_status){
           authService.logout();
           //navigate('/login');
@@ -46,7 +44,6 @@ export const put = async(url,headers) => {
     try {
         const response = await fetch(BASE_URL+url, headers);
         const data =  await response.json();
-        // console.log(data);
         if(data.token_status){
           authService.logout();
           //navigate('/login');

@@ -54,7 +54,6 @@ const Dashboard = () => {
             });
 
             if (response.status === 201) {
-                console.log('Form data submitted successfully.');
                 setFormData({
                     UserName: '',
                     SerialNumber: '',

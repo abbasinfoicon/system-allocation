@@ -5,6 +5,8 @@ import { login } from './authService';
 import { get, put, post } from './Fetch1';
 import { toast } from 'react-toastify';
 
+const BASE_URL = 'http://localhost:3001/api/';
+
 function LoginForm() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -24,7 +26,7 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://ill-slug-pea-coat.cyclic.app:3001/api/login', formData);
+      const response = await axios.post(BASE_URL + '/login', formData);
       const { token } = response.data.data;
       if (response.status === 200) {
         // Store the token in local storage
@@ -81,13 +83,7 @@ function LoginForm() {
               </button>
             </form>
             {error && <div className="error-message">{error}</div>}
-            <div className="social-login">
-              <div className="social-icons">
-                <button type="button" onClick={handleSignUpClick} className="button">
-                  Sign Up
-                </button>
-              </div>
-            </div>
+
           </div>
           <div className="screen__background">
             <span className="screen__background__shape screen__background__shape4"></span>

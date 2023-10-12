@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+const BASE_URL = 'http://localhost:3001/api/';
+
 function RegistrationForm() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -22,10 +24,10 @@ function RegistrationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://ill-slug-pea-coat.cyclic.app:3001/api/create', formData);
+      const response = await axios.post(BASE_URL + '/create', formData);
       navigate('/signup-success');
     } catch (error) {
-      console.log(error)
+      console.error(error)
       toast.error(error.response.data.message);
     }
   };

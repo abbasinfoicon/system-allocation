@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+const BASE_URL = 'http://localhost:3001/api/';
+
 const DashboarManage = () => {
   const navigate = useNavigate();
   const { _id } = useParams();
@@ -42,8 +44,8 @@ const DashboarManage = () => {
       data.oldUserName = formOldData.UserName;
       data.oldStartDate = formOldData.startDate;
       data.oldEndDate = formOldData.endDate;
-      console.log(data);
-      const response = await fetch(`https://ill-slug-pea-coat.cyclic.app:3001/api/updateHistory/${id.id}`, {
+
+      const response = await fetch(`${BASE_URL}/updateHistory/${id.id}`, {
         method: 'PUT', // Use the appropriate HTTP method (PUT or PATCH) for updating data
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +54,6 @@ const DashboarManage = () => {
       });
 
       if (response.status === 200) {
-        console.log('History record updated successfully.');
         setFormData({
           UserName: '',
           startDate: '',
@@ -93,8 +94,6 @@ const DashboarManage = () => {
       }
     }
 
-    console.log("empHistory", (assetData.empHistory.length));
-    // console.log("last data", (assetData.empHistory.slice(-1)[0].endDate).length)
 
     if (formData.UserName && formData.startDate) {
       if (assetData.empHistory.length) {
@@ -102,16 +101,15 @@ const DashboarManage = () => {
           toast.error("This system is already assigned to another user.");
         } else {
           try {
-            const response = await fetch('https://ill-slug-pea-coat.cyclic.app:3001/api/saveHistory/' + id.id, {
+            const response = await fetch(BASE_URL + '/saveHistory/' + id.id, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify(formData),
             });
-            // console.log("Submit:-", response);
+
             if (response.status == 201) {
-              console.log('Form data submitted successfully.');
               setFormData({
                 UserName: '',
                 startDate: '',
@@ -138,16 +136,15 @@ const DashboarManage = () => {
         }
       } else {
         try {
-          const response = await fetch('https://ill-slug-pea-coat.cyclic.app:3001/api/saveHistory/' + id.id, {
+          const response = await fetch(BASE_URL + '/saveHistory/' + id.id, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(formData),
           });
-          // console.log("Submit:-", response);
+
           if (response.status == 201) {
-            console.log('Form data submitted successfully.');
             setFormData({
               UserName: '',
               startDate: '',
@@ -179,7 +176,7 @@ const DashboarManage = () => {
 
   const fetchAssetData = async () => {
     try {
-      const response = await fetch('https://ill-slug-pea-coat.cyclic.app:3001/api/getsystemuser/' + id.id);
+      const response = await fetch(BASE_URL + '/getsystemuser/' + id.id);
       if (response.status == 201) {
         const data = await response.json();
         setAssetData(data);
@@ -192,24 +189,27 @@ const DashboarManage = () => {
     }
   };
 
-  useEffect(() => {
-    fetchAssetData();
-    fetchUserOptions(); // Fetch initial asset data 
-  }, []);
-
+  // fetchUserOptions for select option
   const fetchUserOptions = async () => {
     try {
-      const response = await fetch('https://ill-slug-pea-coat.cyclic.app:3001/api/getUsers'); // Replace with your API endpoint to fetch users
+      const response = await fetch(BASE_URL + '/getEmps'); // Replace with your API endpoint to fetch employee
+
       if (response.status === 200) {
-        const userData = await response.json();
-        setUserOptions(userData.users); // Assuming your API returns an array of user objects
+        const employeeData = await response.json();
+
+        setUserOptions(employeeData.employee); // Assuming your API returns an array of user objects
       } else {
-        console.error('Failed to fetch user options.');
+        console.error('Failed to fetch employee options.');
       }
     } catch (error) {
       console.error('Error:', error);
     }
   };
+
+  useEffect(() => {
+    fetchAssetData();
+    fetchUserOptions(); // Fetch initial asset data 
+  }, []);
   // Function to update the user options when a new user is added
   const handleUserAdded = (newUserName) => {
     setUserOptions([...userOptions, newUserName]);
@@ -231,7 +231,6 @@ const DashboarManage = () => {
       startDate: asset.startDate,
       endDate: asset.endDate,
     });
-    console.log(formData);
   };
 
   // Function to handle the "Cancel Update" button click
@@ -264,9 +263,9 @@ const DashboarManage = () => {
                       onChange={onChangeInput}
                     >
                       <option value="">Select User Name</option>
-                      {userOptions.map((option, i) => (
-                        <option key={i} value={option}>
-                          {option}
+                      {userOptions?.map((option, i) => (
+                        <option key={i} value={option.name}>
+                          {option.name}
                         </option>
                       ))}
                     </select>
@@ -296,8 +295,6 @@ const DashboarManage = () => {
                 </div>
 
                 <div className="form-submit-button mt-4">
-                  <button onClick={handleAddUserClick} className='btn btn-primary me-2'>Add User</button>
-
                   {!isUpdateMode ? (
                     <button type="submit" className='btn btn-primary'>Submit</button>
                   ) : (
